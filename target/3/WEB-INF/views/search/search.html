@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8"/>
+    <title>Search</title>
+</head>
+
+<body>
+    <a href="/">Главная</a>
+
+    <h1>Поиск записей по весу стиральных машин</h1>
+    <p>
+        Введите максимальный вес и получите список
+        стиральных машин, меньших данного веса.
+    </p>
+
+    <form method="GET" action="/search">
+        <label for="weight">Weight=</label>
+        <input name="weight" type="text" id="weight">
+        <br>
+        <input type="submit" value="Поиск">
+    </form>
+
+    <div th:each="washing : ${searchWashing}">
+        <p th:text="${washing}"></p>
+    </div>
+
+    <p th:text="${error}"></p>
+
+</body>
+</html>

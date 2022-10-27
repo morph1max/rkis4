@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8"/>
+    <title>DELETE</title>
+</head>
+
+<body>
+    <a href="/">Главная</a>
+    <h1>Удаление записи</h1>
+
+    <form method="GET" action="/delete">
+        <label for="id">Id washing для удаления=</label>
+        <input name="id" type="text" id="id">
+        <br>
+        <input type="submit" value="удалить">
+    </form>
+
+    </br>
+    <p th:text="${error}"></p>
+
+</body>
+</html>
