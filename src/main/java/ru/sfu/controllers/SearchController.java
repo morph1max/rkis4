@@ -3,6 +3,7 @@ package ru.sfu.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.sfu.dao.WashingDao;
 
@@ -11,6 +12,7 @@ import ru.sfu.dao.WashingDao;
  * Класс-контроллер для поиска объектов по заданному условию.
  */
 @Controller
+@RequestMapping("/user")
 public class SearchController {
     private final WashingDao washingDAO;
     public SearchController(WashingDao washingDAO) {

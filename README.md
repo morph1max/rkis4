@@ -1,10 +1,11 @@
-# РКИС 4
+# РКИС 5
 
-Практическая работа 4. Кобелев М.А. КИ20-17/1Б
+Практическая работа 5. Кобелев М.А. КИ20-17/1Б
 Вариант 17 - Стиральная машинка
 
-В папке src/main/resources находится SQL скрипт для создания базы данных washing и создания таблицы washing
+В папке src/main/resources находится SQL скрипт для создания базы данных washing и
+создания таблиц washing, customUser
 
 Tomcat использовался 8.5.83 версии
 
-![png](smile.png)
+![png](https://tenor.com/view/vibe-rabbit-dance-bunny-vibe-twitch-gif-25518131)

@@ -11,6 +11,7 @@ import ru.sfu.models.Washing;
  * Класс-контроллер для редактирования записей из БД.
  */
 @Controller
+@RequestMapping("/admin")
 public class EditController {
 
     private final WashingDao washingDAO;

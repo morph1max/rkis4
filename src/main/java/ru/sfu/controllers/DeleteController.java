@@ -2,17 +2,14 @@ package ru.sfu.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import ru.sfu.dao.WashingDao;
-import ru.sfu.models.Washing;
 
 /**
  * Класс-контроллер для удаления записей из БД.
  */
 @Controller
+@RequestMapping("/admin")
 public class DeleteController {
 
     private final WashingDao washingDAO;
