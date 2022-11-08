@@ -8,4 +8,4 @@
 
 Tomcat использовался 8.5.83 версии
 
-![png](https://tenor.com/view/vibe-rabbit-dance-bunny-vibe-twitch-gif-25518131)
+![](https://tenor.com/view/vibe-rabbit-dance-bunny-vibe-twitch-gif-25518131)
