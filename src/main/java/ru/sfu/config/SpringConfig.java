@@ -7,7 +7,9 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
+import org.springframework.http.MediaType;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -67,5 +69,15 @@ public class SpringConfig implements WebMvcConfigurer {
         registry.viewResolver(resolver);
         resolver.setCharacterEncoding("UTF-8");
         resolver.setContentType("text/html; charset=UTF-8");
+    }
+
+    @Override
+    public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
+        configurer.favorPathExtension(false)//默认后缀模式是开启的，自定义关闭
+                .mediaType("xml", MediaType.APPLICATION_XML)//如果后缀是xml，返回媒体类型为application/xml
+                .mediaType("json", MediaType.APPLICATION_JSON)//如果后缀是json，返回媒体类型为application/json
+                .favorParameter(true)//默认是关闭的，自定义开启
+                .defaultContentType(MediaType.APPLICATION_XML)//自定义默认返回媒体类型为application/xml
+                .ignoreAcceptHeader(true);//关闭Header Strategy
     }
 }
