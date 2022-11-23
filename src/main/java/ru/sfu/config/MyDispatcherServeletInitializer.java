@@ -13,7 +13,7 @@ import javax.servlet.ServletException;
 public class MyDispatcherServeletInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return new Class<?>[] { SecurityConfig.class};
+        return new Class<?>[] {};
     }
 
     @Override

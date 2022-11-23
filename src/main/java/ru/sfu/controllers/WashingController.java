@@ -45,18 +45,17 @@ public class WashingController {
         return washing.toString();
     }
 
-    @ResponseBody
-    @PostMapping(value="/washing/add", headers = {"Accept=application/json"})
+    @PostMapping(value="/washing/add")
     public String addWashing(@RequestBody Washing washing) {
 
         washingDAO.insert(washing);
         return washing.toString();
     }
 
-    @PatchMapping("/washing/put/{id}")
-    public String patchWashing(
+    @PutMapping("/washing/put/{id}")
+    public String putWashing(
             @PathVariable("id") int id,
-            @ModelAttribute("washing") Washing washing
+            @RequestBody Washing washing
     ) {
 
         washingDAO.edit(id, washing);
