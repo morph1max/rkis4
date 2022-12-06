@@ -1,5 +1,11 @@
 package ru.sfu.config;
 
+import org.springframework.amqp.core.AmqpAdmin;
+import org.springframework.amqp.core.Queue;
+import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
+import org.springframework.amqp.rabbit.core.RabbitAdmin;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -26,6 +32,7 @@ import javax.sql.DataSource;
 public class SpringConfig implements WebMvcConfigurer {
     @Autowired
     private Environment env;
+    static final String queueName = "washing-queue";
 
     @Bean
     DataSource dataSource() {
@@ -70,4 +77,16 @@ public class SpringConfig implements WebMvcConfigurer {
         resolver.setCharacterEncoding("UTF-8");
         resolver.setContentType("text/html; charset=UTF-8");
     }
+
+    @Bean
+    RabbitTemplate rabbitTemplate(){
+        CachingConnectionFactory connectionFactory =
+                new CachingConnectionFactory("localhost", 5672);
+        AmqpAdmin admin = new RabbitAdmin(connectionFactory);
+        admin.declareQueue(new Queue(queueName));
+        RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);
+        rabbitTemplate.setMessageConverter(new Jackson2JsonMessageConverter());
+        return rabbitTemplate;
+    }
+
 }

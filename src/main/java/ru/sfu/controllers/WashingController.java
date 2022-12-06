@@ -1,5 +1,6 @@
 package ru.sfu.controllers;
 
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -16,8 +17,10 @@ import java.util.List;
 public class WashingController {
 
     private final WashingDao washingDAO;
-    public WashingController(WashingDao washingDAO) {
+    private final RabbitTemplate rabbitTemplate;
+    public WashingController(WashingDao washingDAO, RabbitTemplate rabbitTemplate) {
         this.washingDAO = washingDAO;
+        this.rabbitTemplate = rabbitTemplate;
     }
 
     /**
@@ -27,6 +30,12 @@ public class WashingController {
     public String getAllWashing() {
 
         List<Washing> washings = washingDAO.findAll();
+
+        rabbitTemplate.convertAndSend(
+                "student-queue",
+                "get list washings " + washings
+        );
+
         return washings.toString();
     }
 
@@ -42,6 +51,12 @@ public class WashingController {
                 break;
             }
         }
+
+        rabbitTemplate.convertAndSend(
+                "student-queue",
+                "get one washing id=" + id + " " + washing
+        );
+
         return washing.toString();
     }
 
@@ -49,6 +64,12 @@ public class WashingController {
     public String addWashing(@RequestBody Washing washing) {
 
         washingDAO.insert(washing);
+
+        rabbitTemplate.convertAndSend(
+                "student-queue",
+                "add washing " + washing
+        );
+
         return washing.toString();
     }
 
@@ -57,6 +78,11 @@ public class WashingController {
             @PathVariable("id") int id,
             @RequestBody Washing washing
     ) {
+
+        rabbitTemplate.convertAndSend(
+                "student-queue",
+                "put washing " + washing
+        );
 
         washingDAO.edit(id, washing);
         return washing.toString();
@@ -73,6 +99,11 @@ public class WashingController {
                 break;
             }
         }
+
+        rabbitTemplate.convertAndSend(
+                "student-queue",
+                "delete washing" + washing
+        );
 
         washingDAO.delete(id);
 
